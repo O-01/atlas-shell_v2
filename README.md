@@ -1,4 +1,5 @@
 # hsh - SHELL_V2
+![Screenshot](https://github.com/user-attachments/assets/bff7fe95-9d36-41d9-9807-069927b7fbc1)
 ### Introduction
 > This README is for the C - Shell v2 project at Atlas School.
 > This document lists all project requirements and allowed standard library functions, as well as steps to compile and run the program.
