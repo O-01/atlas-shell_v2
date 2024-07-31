@@ -1,5 +1,4 @@
 # hsh - SHELL_V2
-
 ### Introduction
 > This README is for the C - Shell v2 project at Atlas School.
 > This document lists all project requirements and allowed standard library functions, as well as steps to compile and run the program.
@@ -10,92 +9,79 @@ This program simulates a command interpreter based in UNIX and GNU/LINUX with it
 hsh is not expected to be an exact implementation of bash, yet it is still quite capable of operating with and performing the most commonly used basic functions.
 
 Operates in the following modes:
-* ***Interactive mode*** -
+- ***Interactive mode*** -
 Commands are executed per user interaction within application with constant return to application prompt upon command execution/failure.  
-* ***Non-interactive mode*** - Shell runs from an automated process of command(s) piped to the hsh shell executable without entering to the application prompt interface and cannot currently request input or assume that further input may occur.
-
+- ***Non-interactive mode*** - Shell runs from an automated process of command(s) piped to the hsh shell executable without entering to the application prompt interface and cannot currently request input or assume that further input may occur.
 ### Requirements
-* Modern GNU/Linux operating system, working environment, or equivalent
-* GCC version 4.8.4 or higher along with its dependencies (incl. GNU make)
-
+- Modern GNU/Linux operating system, working environment, or equivalent
+- GCC version 4.8.4 or higher along with its dependencies (incl. GNU make)
 ### Compilation
 > This repository contains a makefile for compiling the program using `gcc 4.8.4`.
-
 1. Clone or download source zip [here](https://github.com/O-01/atlas-shell_v2/archive/refs/heads/master.zip) and extract locally.
 2. Open console/terminal and navigate to cloned repository directory or directory containing extracted source files.
 3. Enter `make`.
 4. Source files are compiled to produce `hsh` application.
-
 ### Launch
-
 #### Interactive mode:
-
 1. Open console/terminal and navigate to directory containing compiled `hsh` binary.
 2. Enter `./hsh` to launch application in interactive mode.
 3. User will be presented with prompt that appears as below:
-    ```
-    # 
-    ```
+```
+# 
+```
 4. Once any desired commands have been entered at the prompt, the process of their execution will begin once the `ENTER` key is been pressed.
 5. Enjoy!
-
 > Interactive mode may be exited at any time by entering `exit` or pressing `CTRL+D` at the prompt.
-
 #### Non-interactive mode:
-
 1. Open console/terminal and navigate to directory containing compiled `hsh` binary.
-2. Echo desired command as pipe to `./hsh`.    
-Example:    
+2. Echo desired command as pipe to `./hsh`.
 
-    ```
-    $ echo "ls -1R" | ./hsh
-    AUTHORS
-    build
-    hsh
-    hsh-debug
-    include
-    Makefile
-    man_1_hsh
-    README.md
-    src
-    $ 
-    ```
-
+Example:
+```
+$ echo "ls -1R" | ./hsh
+AUTHORS
+build
+hsh
+hsh-debug
+include
+Makefile
+man_1_hsh
+README.md
+src
+$ 
+```
 ## Features
+- This program displays a prompt and waits for the user to type a command. Command line input is performed by pressing `ENTER` key.
 
-* This program displays a prompt and waits for the user to type a command. Command line input is performed by pressing `ENTER` key.
+- The prompt is displayed again each time a command has been executed in interactive mode.
 
-* The prompt is displayed again each time a command has been executed in interactive mode.
+- When the user enters `exit`, hsh will end with status 0.
 
-* When the user enters `exit`, hsh will end with status 0.
+    - User may enter desired code to exit application with that code e.g. `exit 144`.
 
-    * User may enter desired code to exit application with that code e.g. `exit 144`.
+- Otherwise, user may exit the program using `CTRL+D` (`EOF` / `END OF FILE`).
 
-* Otherwise, user may exit the program using `CTRL+D` (`EOF` / `END OF FILE`).
+- Program does not exit when user inputs `^C` (`CTRL+C`).
 
-* Program does not exit when user inputs `^C` (`CTRL+C`).
+- Handles successive command line inputs with arguments and pathways.
 
-* Handles successive command line inputs with arguments and pathways.
+- Change working directory using `cd`.
 
-* Change working directory using `cd`.
+- View and manipulate environment variable values using `env`, `setenv`, `unsetenv`.
 
-* View and manipulate environment variable values using `env`, `setenv`, `unsetenv`.
+- Executes programs stored in PATH locations along with arguments.
 
-* Executes programs stored in PATH locations along with arguments.
+- When command cannot be found, an error message is printed and returns user to the prompt.
 
-* When command cannot be found, an error message is printed and returns user to the prompt.
+- Commands may be separated by control or redirect operators including: `;` `&&` `||` `>` `>>` `<` `|`.
 
-* Commands may be separated by control or redirect operators including: `;` `&&` `||` `>` `>>` `<` `|`.
+- Current version only marginally supports pipes `|` and does not support heredoc `<<`.
 
-* Current version only marginally supports pipes `|` and does not support heredoc `<<`.
+- Does not currently support commentaries using `#`.
 
-* Does not currently support commentaries using `#`.
-
-* Does not currently support wildcard characters or quotes in any situation.
-
+- Does not currently support wildcard characters or quotes in any situation.
 ## Built-in command implementations
-
-* #### *cd* - Changes current working directory to directory specified.
+- #### *cd* - Changes current working directory to directory specified.
     ```
     # cd /home ; pwd
     /home
@@ -105,7 +91,7 @@ Example:
     /home/user/Project/atlas-shell_v2
     #
     ```
-* #### *env* - Lists environmental variables.
+- #### *env* - Lists environmental variables.
     ```
     # env
     SHELL=/bin/bash
@@ -113,7 +99,7 @@ Example:
     HOME=/home/user
     [...]
     ```
-* #### *exit* - Exits application with desired status code or 0 if unspecified.
+- #### *exit* - Exits application with desired status code or 0 if unspecified.
     ```
     # exit
     root@user:atlas-shell_v2#
@@ -126,14 +112,14 @@ Example:
     root@user:atlas-shell_v2# echo $?
     144
     ```
-* #### *setenv* - Sets or creates environmental variable of specified name and value.
+- #### *setenv* - Sets or creates environmental variable of specified name and value.
     ```
     # setenv NAME value
     # env
     [...]
     NAME=value
     ```
-* #### *unsetenv* - Clears or removes variable of specified name from environmental variables.
+- #### *unsetenv* - Clears or removes variable of specified name from environmental variables.
     ```
     # env ; unsetenv NAME ; echo -- ; env
     [...]
@@ -143,9 +129,8 @@ Example:
     [...]
     [...]
     ```
-
 ## Examples of Usage with Standard Applications
-* ### *ls*
+- ### *ls*
     ```
     # ls -R
     .:
@@ -158,7 +143,7 @@ Example:
     builtin.c  error.c  free.c  _getenv.c  launcher.c  memory_tools.c  operators.c  parse.c  separator.c  _sh.c  string.c  tools.c
     # 
     ```
-* ### *cal*
+- ### *cal*
     ```
     # cal -3
     December 2023          January 2024         February 2024      
@@ -171,7 +156,7 @@ Example:
     31  
     # 
     ```
-* ### *ps*
+- ### *ps*
     ```
     # ps -lm
     F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
@@ -183,7 +168,6 @@ Example:
     4 R  1000       -       - 99  80   0 -     - -      -        00:00:00 -
     # 
     ```
-
 ## Repository Files
 | **File** | *__Description__* |
 |----------|----------------:|
@@ -202,9 +186,7 @@ Example:
 |src/tools.c| File containing functions for various tools such as a function that checks if an input char is a digit or a function that converts strings to ints|
 |Makefile| File containing all the rules needed for compiling the program|
 |Authors| File containing the Authors|
-
 ## Project description
-
 ### Requirements
 - Allowed editors: vi, vim, emacs
 - All your files will be compiled on Ubuntu 14.04 LTS
@@ -264,10 +246,9 @@ Example:
 - fprintf
 - vfprintf
 - sprintf
-
 ## Authors / Contact info
-* **Sammy Ansari** **|** [Github](https://github.com/O-01) **|** [LinkedIn](https://linkedin.com/in/sammy-ansari) **|** [Email](mailto:sam.ansari@atlasschool.com)
-* **Logan Savage** **|** [Github](https://github.com/SavageLM) **|** [LinkedIn](https://www.linkedin.com/in/logan-m-savage/) **|** [Email](mailto:logan.savage@atlasschool.com)  
-##
+- **Sammy Ansari** **|** [Github](https://github.com/O-01) **|** [LinkedIn](https://linkedin.com/in/sammy-ansari) **|** [Email](mailto:sam.ansari@atlasschool.com)
+- **Logan Savage** **|** [Github](https://github.com/SavageLM) **|** [LinkedIn](https://www.linkedin.com/in/logan-m-savage/) **|** [Email](mailto:logan.savage@atlasschool.com)  
+#
 ![Atlas School](https://assets-global.website-files.com/6571f4826e9363343bcd2acd/658c333153345aa78869f0b3_logo-atlas-school-blue-lightning-bug.svg)
-##
+#
